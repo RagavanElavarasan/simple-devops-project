@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 echo 'Cloning code from Git repository...'
-                git 'https://github.com/RagavanElavarasan/simple-devops-project'
+                git branch: 'main', url: 'https://github.com/RagavanElavarasan/simple-devops-project'
             }
         }
 
