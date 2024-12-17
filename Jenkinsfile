@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 echo 'Cloning code from Git repository...'
-                git branch: 'main', url: 'https://github.com/RagavanElavarasan/simple-devops-project'
+                git 'https://github.com/RagavanElavarasan/simple-devops-project'
             }
         }
 
@@ -25,6 +25,11 @@ pipeline {
 
         stage('Docker Run') {
             steps {
+                echo 'Stopping and removing existing container if exists...'
+                bat '''
+                    docker stop simple-node-app || echo "No running container found"
+                    docker rm simple-node-app || echo "No container to remove"
+                '''
                 echo 'Running Docker container...'
                 bat 'docker run -d -p 3000:3000 --name simple-node-app simple-node-app'
             }
