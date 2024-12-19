@@ -34,5 +34,13 @@ pipeline {
                 bat 'docker run -d -p 3000:3000 --name simple-node-app simple-node-app'
             }
         }
+
+        stage('Run Tests') {
+            steps {
+                echo 'Running tests...'
+                bat 'npm test'
+            }
+        }
+
     }
 }
